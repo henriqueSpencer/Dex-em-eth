@@ -3,7 +3,8 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 //import "hardhat/console.sol";
-
+//endereco token: 0x42D91847656a4051410B29780ba25f712d227239
+//TOTAL TOKENS: 1000000000000000000000
 import "../Owned.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -52,17 +53,32 @@ contract  Dex  is Mortal{
                 b=(y*a)/(x+a)
     */
     function price(uint256 input_amount, uint256 input_reserve, uint256 output_reserve) public view returns (uint256) {
+
         //Ex: trocando A -> B
         //input_amount = Qtd de A que voce esta vendendo
         //input_reserve = Total A na DEX
         //output_reserve = Total de B na Dex
-        uint256 input_amount_with_fee = input_amount.mul(997);// não é 1000 pq tem uma taxa de 0.3%
-        uint256 numerator = input_amount_with_fee.mul(output_reserve);
-        uint256 denominator = input_reserve.mul(1000).add(input_amount_with_fee);
-        return numerator / denominator;
+        // uint256 input_amount_with_fee = input_amount.mul(997);// não é 1000 pq tem uma taxa de 0.3%
+        // uint256 numerator = input_amount_with_fee.mul(output_reserve);
+        // uint256 denominator = input_reserve.mul(1000).add(input_amount_with_fee);
+        // return numerator / denominator;
         // a*997*y           997    a*y
         // -------         = ---  * ---  = b
         // x*1000 + a*997    1000  (x+a)
+
+        return input_amount.mul(997).mul(output_reserve) / input_reserve.mul(1000).add(input_amount.mul(997));
+    }
+    function equivalenteToken(uint256 qtdEth) public view returns (uint256) {
+        return price(qtdEth, address(this).balance, token.balanceOf(address(this)));
+    }
+    function equivalenteEth(uint256 qtdToken) public view returns (uint256) {
+        return price(qtdToken, token.balanceOf(address(this)), address(this).balance);
+    }
+    function PoolEth() public view returns (uint256) {
+        return address(this).balance;
+    }
+    function PoolTokens() public view returns (uint256) {
+        return token.balanceOf(address(this));
     }
 
     // trade ether for tokens
@@ -113,14 +129,16 @@ contract  Dex  is Mortal{
         //Token na DEX
         uint256 token_reserve = token.balanceOf(address(this));
         //valor requerido(ETH) * balanço(ETH) / liquidezTotal
+        //saca o valor que quer * retorno do pool em % (ETH)
         uint256 eth_amount = amount.mul(address(this).balance) / totalLiquidity;
-
+        //saca o valor que quer * retorno do pool em % (ETH)
         uint256 token_amount = amount.mul(token_reserve) / totalLiquidity;
 
+        //subtraindo valor do saque
         liquidity[msg.sender] = liquidity[msg.sender].sub(eth_amount);
-
+        // subtraindo o saque
         totalLiquidity = totalLiquidity.sub(eth_amount);
-        //msg.sender.transfer(eth_amount);
+        //Transferencias
         payable(msg.sender).transfer(eth_amount);
         require(token.transfer(msg.sender, token_amount));
         return (eth_amount, token_amount);

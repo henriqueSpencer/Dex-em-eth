@@ -25,11 +25,11 @@
         <div class="col-md order-md mb">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">SWAP</span>
-            <span class="badge badge-secondary badge-pill" id="pool_tokens">
-              Pool Tokens: -
+            <span class="badge badge-secondary badge-pill" id="Span_tokens">
+              Pool Tokens: -<div id="pool_tokens"></div>
             </span>
-            <span class="badge badge-secondary badge-pill" id="pool_eth">
-              Pool ETH: -
+            <span class="badge badge-secondary badge-pill" id="Span_eth">
+              Pool ETH: -<div id="pool_eth"></div>
             </span>
           </h4>
           <ul class="list-group mb-3">
@@ -37,8 +37,8 @@
               class="list-group-item d-flex justify-content-between lh-condensed"
             >
               <div>
-                <h6 class="my-0">Preço unitário</h6>
-                <small class="text-muted" id="endereco">-</small>
+                <h6 class="my-0">Quantidade em ETH</h6>
+                <small class="text-muted" id="eth_qtd"></small><small class="text-muted"> ETH</small>
               </div>
               <span id="total-rifas" class="text-muted"></span>
             </li>
@@ -46,24 +46,24 @@
               class="list-group-item d-flex justify-content-between lh-condensed"
             >
               <div>
-                <h6 class="my-0">Valuation no outro Token</h6>
-                <small class="text-muted">Total de rifas vendidas</small>
+                <h6 class="my-0">Quantidade em Tokens</h6>
+                <small class="text-muted" id="token_qtd"></small><small class="text-muted"> Tokens</small>
               </div>
               <span class="text-muted" id="total-geral"></span>
             </li>
-            <li
-              class="list-group-item d-flex justify-content-between lh-condensed"
-            >
-              <div>
-                <h6 class="my-0">Prêmio do Vencedor</h6>
-                <small class="text-muted">em ether</small>
-              </div>
-              <span class="text-muted" id="premio"></span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <h6 class="my-0">Ganhador</h6>
-              <span class="text-muted" id="ganhador"></span>
-            </li>
+<!--            <li-->
+<!--              class="list-group-item d-flex justify-content-between lh-condensed"-->
+<!--            >-->
+<!--              <div>-->
+<!--                <h6 class="my-0">Prêmio do Vencedor</h6>-->
+<!--                <small class="text-muted">em ether</small>-->
+<!--              </div>-->
+<!--              <span class="text-muted" id="premio"></span>-->
+<!--            </li>-->
+<!--            <li class="list-group-item d-flex justify-content-between">-->
+<!--              <h6 class="my-0">Ganhador</h6>-->
+<!--              <span class="text-muted" id="ganhador"></span>-->
+<!--            </li>-->
           </ul>
 
 
@@ -106,25 +106,25 @@
         </div>
       </div>
       <br>
-      <div class="row">
-        <table class="table">
-          <thead>
-            <tr>
-              <th style="text-align: center;" scope="col" colspan="3">COMPRAS DE RIFAS</th>
-            </tr>
-            <tr>
-                <th class="small text-center" scope="col">Endereço</th>
-                <th class="small text-center" scope="col">Quantidade</th>
-                <th class="small text-center" scope="col">Transação</th>
-              </tr>
-          </thead>
-          <tbody id="events" class="small text-center">
-          </tbody>
-        </table>
-      </div>
+<!--      <div class="row">-->
+<!--        <table class="table">-->
+<!--          <thead>-->
+<!--            <tr>-->
+<!--              <th style="text-align: center;" scope="col" colspan="3">COMPRAS DE RIFAS</th>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <th class="small text-center" scope="col">Endereço</th>-->
+<!--                <th class="small text-center" scope="col">Quantidade</th>-->
+<!--                <th class="small text-center" scope="col">Transação</th>-->
+<!--              </tr>-->
+<!--          </thead>-->
+<!--          <tbody id="events" class="small text-center">-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--      </div>-->
 
       <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">IMD - IMD0293</p>
+        <p class="mb-1">Hs</p>
       </footer>
     </div>
 
