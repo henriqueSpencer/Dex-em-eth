@@ -3,8 +3,8 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 //import "hardhat/console.sol";
-//endereco token: 0x42D91847656a4051410B29780ba25f712d227239
-//TOTAL TOKENS: 1000000000000000000000
+//enderecotoken:0x42D91847656a4051410B29780ba25f712d227239
+//TOTALTOKENS:1000000000000000000000
 import "../Owned.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -28,7 +28,8 @@ contract  Dex  is Mortal{
     }
 
     //Serve so para dar a liquidez inicial do pool
-    function init(uint256 tokens) public payable returns (uint256) {
+    function init(uint256 tokens) external payable returns (uint256) {
+        require(msg.value>0, "Tem que tranferir eth tbm");
         require(totalLiquidity==0, "DEX:init - already has liquidity");
         totalLiquidity = address(this).balance;
         liquidity[msg.sender] = totalLiquidity;
